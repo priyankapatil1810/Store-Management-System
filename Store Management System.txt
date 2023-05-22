@@ -1,0 +1,73 @@
+Source Code:
+	
+class product:
+    def __init__(self,product_code,name,price):
+        self.product_code=product_code
+        self.name=name
+        self.price=price
+        
+class Store:
+    def __init__(self):
+        self.product_list=[]
+        self.cart=[]
+    def add(self,product):
+        self.product_list.append(product) 
+
+    def display(self):
+        for product in self.product_list:
+            print(f'{product.product_code}\t{product.name}\t{product.price}\n')
+
+    def add_to_cart(self,product):
+        for item in self.product_list:
+            if item.product_code==product:
+                self.cart.append(item)
+                print("\nAdded\n")
+                return
+        print("\nItem not present in store")
+
+    def remove_from_cart(self,product):
+        for item in self.cart:
+            if item.product_code==product:
+                self.cart.remove(item)
+                print(f'{item.name} removed from cart\n')
+                return
+            print("\nNo product found in cart with this code\n")
+    
+    def generate_bill(self):
+        amount=0
+        for product in self.cart:
+            amount += product.price
+        print(f'\nTotal bill amount is {amount}\n')
+     
+    def display_cart(self):
+        for item in self.cart:
+            print(f'{item.name}\n')
+
+_name_="_main_"      
+if _name_== "_main_":
+    s = Store()
+    
+    s.add(product(1,"Milk",20))
+    s.add(product(2,"Wheat",300))
+    s.add(product(3,"Chocos",150))
+    s.add(product(4,"Biscuit",10))
+    while(1):
+        print("1.Display Products\n2.Add product to cart\n3.Remove product\n4.View cart\n5.Generate bill\n6.Exit")
+        choice=int(input("Enter your choice :"))
+        if choice==1:
+            s.display()
+        elif choice==2:
+            code=int(input("Enter product code :"))
+            s.add_to_cart(code)
+        elif choice==3:
+            code=int(input("Enter product code :"))
+            s.remove_from_cart(code)
+        elif choice==4:
+            s.display_cart()
+        elif choice==5:
+            s.generate_bill()
+        elif choice==6:
+            break
+        else:
+            print("Enter a Valid Choice..")
+            
